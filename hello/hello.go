@@ -13,23 +13,23 @@ func Hello(name string, lang string) string {
 	switch lang {
 	case "eng":
 		prefix = englishHelloPrefix
-		if name == "" {
-			name = "World"
-		}
+		checkName(&name, "World")
 	case "esp":
 		prefix = spanishHelloPrefix
-		if name == "" {
-			name = "Mundo"
-		}
+		checkName(&name, "Mundo")
 	default:
 		prefix = englishHelloPrefix
-		if name == "" {
-			name = "World"
-		}
+		checkName(&name, "World")
 	}
 	return prefix + name
 }
 
 func main() {
 	fmt.Println(Hello("world", "eng"))
+}
+
+func checkName(name *string, defaultValue string) {
+	if *name == "" {
+		*name = defaultValue
+	}
 }
