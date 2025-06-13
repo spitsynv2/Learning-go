@@ -10,19 +10,13 @@ import (
 func TestCountdown(t *testing.T) {
 	t.Run("print 3 to Go!", func(t *testing.T) {
 		buffer := &bytes.Buffer{}
-		spySleeper := &SpySleeper{}
-
-		Countdown(buffer, spySleeper)
+		Countdown(buffer, &SpyCountdownOperations{})
 
 		got := buffer.String()
 		expected := "3\n2\n1\nGo!"
 
 		if got != expected {
 			t.Errorf("got %q want %q", got, expected)
-		}
-
-		if spySleeper.Calls != 3 {
-			t.Errorf("not enough calls to sleeper, want 3 got %d", spySleeper.Calls)
 		}
 	})
 
